@@ -46,9 +46,9 @@
    4. start a noter session with Moby Dick.
 
 * Run the speed test
-  1. Close the ~*Warnings*~ buffer is it is open.
-  2. Type ~C-c C-c~ to execute the code (this works from either the document or
+  1. Type ~C-c C-c~ to execute the code (this works from either the document or
      the notes buffer).
-  3. The time and version info will be reported under RESULTS, and the profiler
-     report will be written to the file
+  2. The time and version info will be reported under ~#+RESULTS:~ in the
+     ~Notes.org~ buffer, and the profiler report will be written to the
+     ~results~ subdirectory to this repo with a filename of the form
      ~speed-test-Emacs<version>-Org<version>-<elapsed-time>~
