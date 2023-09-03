@@ -1,0 +1,54 @@
+* Abstract
+
+  With each new release of Emacs and Org-mode, Org-noter runs slower and slower.
+  The scripts here are meant to facilitate repeatable speed tests of Org-noter
+  while keeping track of the Emacs and Org versions.
+
+  The ~get-repos~ bash script clones the necessary repositories at commits that
+  will give a reasonable result.
+
+  The ~speed-test~ bash script sets up a clean Emacs session that is ready to
+  run the timing test embedded as `org-babel` code in the first `org-noter`
+  entry of Moby Dick in `org-noter/tests/Notes.org`.
+
+* Setup
+
+  Run this once -- it will clone the repos and check out v1.1.0 of Pdf-tools and
+  release 9.4.6 of Org-mode.
+
+  #+begin_src bash
+    ./get-repos
+  #+end_src
+
+* Launch the minimally-customized emacs session
+
+  To test a different version of Emacs that is installed on your system, link
+  your ~emacs~ executable to the proper version.  The default location is
+  =/usr/local/bin/emacs=, which is a symlink to an installed version.
+
+  Check out the version of Org mode that you with to test.
+
+  Then run:
+
+  #+begin_src bash
+    ./speed-test
+  #+end_src
+  
+  - ~speed-test~
+   1. clean and recompile ~pdf-tools~
+   2. clean and recompile ~org-mode~
+   3. start emacs with ~speed-test.el~ as the init file.
+
+  - ~speed-test.el~
+   1. load ~pdf-tools~, ~org-mode~ and ~org-noter~ from the repos
+   2. define the timing macro used in the Moby Dick notes
+   3. add a hook to =kill-emacs= to delete the ~pdf-tools~ loaded in step 1
+   4. start a noter session with Moby Dick.
+
+* Run the speed test
+  1. Close the ~*Warnings*~ buffer is it is open.
+  2. Type ~C-c C-c~ to execute the code (this works from either the document or
+     the notes buffer).
+  3. The time and version info will be reported under RESULTS, and the profiler
+     report will be written to the file
+     ~speed-test-Emacs<version>-Org<version>-<elapsed-time>~

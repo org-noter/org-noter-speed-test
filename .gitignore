@@ -1,0 +1,5 @@
+# Lines that start with '#' are comments.
+*~
+/pdf-tools/
+/org-mode/
+/org-noter/

@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+git clone https://github.com/org-noter/org-noter.git
+git clone --branch v1.1.0 https://github.com/vedang/pdf-tools.git
+git clone --branch release_9.4.6 https://git.sr.ht/~bzg/org-mode
