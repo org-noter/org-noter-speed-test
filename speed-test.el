@@ -1,6 +1,18 @@
+;; message the Org version when Org loads.  If this is the "init" file, then
+;; this message is displayed in the middle of the pdf-tools installation.
+(with-eval-after-load 'org
+  (message "%s loaded" (org-version nil t nil)))
+
+;; Remove the built-in version of Org from the load-path
+(require 'cl-seq)
+(setq load-path
+      (cl-remove-if
+       (lambda (x)
+         (string-match-p "org$" x))
+       load-path))
+
 ;; load the relevant packages
 (add-to-list 'load-path (concat default-directory "org-mode/lisp"))
-(require 'org)
 (package-install-file (concat default-directory "pdf-tools/pdf-tools-1.1.0.tar"))
 (pdf-tools-install)
 (add-to-list 'load-path (concat default-directory "org-noter"))
